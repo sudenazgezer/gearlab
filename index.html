@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GearLab · Engineering, but make it fun</title>
+  <meta name="description" content="GearLab is a colorful, playful toolkit for mechanical engineering students. Fast unit conversions with live results.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top bar -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="#top" class="logo" aria-label="GearLab home">
+        <svg class="logo-gear" viewBox="-50 -50 100 100" aria-hidden="true"><path id="logoGearPath"/></svg>
+        <span>Gear<b>Lab</b></span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="#converter">Converter</a>
+        <a href="#pricing">Pricing</a>
+      </nav>
+      <div class="progress" aria-live="polite">
+        <div class="badge-shelf" id="badgeShelf">
+          <span class="shelf-badge" data-badge="apprentice" title="Apprentice: 1st calculation">🔧</span>
+          <span class="shelf-badge" data-badge="technician" title="Technician: 10 calculations">⚙️</span>
+          <span class="shelf-badge" data-badge="chief" title="Chief Engineer: 25 calculations">🏆</span>
+        </div>
+        <span class="calc-count" title="Calculations so far"><span id="calcCount">0</span><small> calcs</small></span>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <span class="eyebrow">🛠️ The mech-eng student toolkit</span>
+          <h1>Engineering,<br>but make it <span class="fun">fun.</span></h1>
+          <p class="lead">Convert units in a blink, collect badges as you go, and keep your gears turning through problem sets, labs and late-night design reviews.</p>
+          <div class="hero-actions">
+            <a href="#converter" class="btn btn-primary">Start converting →</a>
+            <a href="#pricing" class="btn btn-ghost">See plans</a>
+          </div>
+        </div>
+        <div class="hero-art">
+          <svg id="gears" class="gears" viewBox="40 20 440 300" role="img" aria-label="Three interlocking gears. Hover to speed them up.">
+            <g id="gearA" class="gear gear-a"><path/></g>
+            <g id="gearB" class="gear gear-b"><path/></g>
+            <g id="gearC" class="gear gear-c"><path/></g>
+          </svg>
+          <p class="hint">Psst: hover (or tap) the gears 👆</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Converter -->
+    <section id="converter" class="section">
+      <div class="container">
+        <h2 class="section-title">Unit Converter</h2>
+        <p class="section-sub">Pick a quantity, type a number, and results update while you type.</p>
+
+        <div class="tabs" role="tablist" aria-label="Quantity">
+          <button class="tab" role="tab" data-cat="length" aria-selected="true">📏 Length</button>
+          <button class="tab" role="tab" data-cat="mass" aria-selected="false" tabindex="-1">⚖️ Mass</button>
+          <button class="tab" role="tab" data-cat="force" aria-selected="false" tabindex="-1">💪 Force</button>
+          <button class="tab" role="tab" data-cat="pressure" aria-selected="false" tabindex="-1">🎈 Pressure</button>
+          <button class="tab" role="tab" data-cat="energy" aria-selected="false" tabindex="-1">⚡ Energy</button>
+          <button class="tab" role="tab" data-cat="temperature" aria-selected="false" tabindex="-1">🌡️ Temp</button>
+          <span class="tab-indicator" aria-hidden="true"></span>
+        </div>
+
+        <div class="card converter-card" role="tabpanel" id="convPanel">
+          <div class="conv-row">
+            <div class="field">
+              <label for="fromValue">Value</label>
+              <input id="fromValue" type="text" inputmode="decimal" autocomplete="off" value="1" aria-describedby="inputHint">
+            </div>
+            <div class="field">
+              <label for="fromUnit">From</label>
+              <select id="fromUnit"></select>
+            </div>
+            <button type="button" class="btn swap" id="swapBtn" aria-label="Swap units" title="Swap units">⇄</button>
+            <div class="field">
+              <label for="toUnit">To</label>
+              <select id="toUnit"></select>
+            </div>
+          </div>
+
+          <div class="result" aria-live="polite">
+            <span class="result-label">Result</span>
+            <output id="result" class="result-value">–</output>
+            <span id="inputHint" class="input-hint"></span>
+          </div>
+
+          <div class="all-units">
+            <h3>In every unit</h3>
+            <div id="allUnits" class="chips"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">Simple pricing</h2>
+        <p class="section-sub">Cheaper than a coffee. Way cheaper than a failed exam.</p>
+
+        <div class="pricing-grid">
+          <article class="card price-card">
+            <div class="plan-icon">🎓</div>
+            <h3>Student</h3>
+            <p class="price"><span class="amount">$0</span><span class="per">forever</span></p>
+            <ul class="features">
+              <li>All 6 unit converters</li>
+              <li>Live results while you type</li>
+              <li>Collect achievement badges</li>
+              <li>Works great on your phone</li>
+            </ul>
+            <button type="button" class="btn btn-secondary" id="studentCta">Start for free</button>
+          </article>
+
+          <article class="card price-card price-pro">
+            <span class="ribbon">Coming soon ✨</span>
+            <div class="plan-icon">🚀</div>
+            <h3>Pro</h3>
+            <p class="price"><span class="amount">$4</span><span class="per">/ month</span></p>
+            <ul class="features">
+              <li>Everything in Student</li>
+              <li>Conversion history</li>
+              <li>Custom units &amp; favorites</li>
+              <li>Formula sheets: beams, gears, fluids</li>
+              <li>Dark "night shift" workshop mode</li>
+            </ul>
+            <button type="button" class="btn btn-primary" id="proCta">Go Pro</button>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Made with ⚙️ and ☕ for future engineers. © GearLab</p>
+    <button type="button" class="link-btn" id="resetBtn">Reset progress</button>
+  </footer>
+
+  <!-- Badge popup -->
+  <div class="modal" id="badgeModal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="badgeTitle">
+      <div class="modal-emoji" id="badgeEmoji">🔧</div>
+      <p class="modal-kicker">Badge unlocked!</p>
+      <h3 id="badgeTitle">Apprentice</h3>
+      <p id="badgeText">Your first calculation. Every great machine starts with one bolt.</p>
+      <button type="button" class="btn btn-primary" id="badgeClose">Nice!</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <canvas id="confetti" class="confetti" aria-hidden="true"></canvas>
+
+  <script src="app.js"></script>
+</body>
+</html>
